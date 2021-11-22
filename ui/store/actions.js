@@ -1304,7 +1304,7 @@ export function addCollectible(address, tokenID, dontShowLoadingIndicator) {
       dispatch(showLoadingIndication());
     }
     try {
-      await promisifiedBackground.addCollectible(address, tokenID);
+     return await promisifiedBackground.addCollectible(address, tokenID);
     } catch (error) {
       log.error(error);
       dispatch(displayWarning(error.message));

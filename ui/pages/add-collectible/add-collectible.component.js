@@ -6,13 +6,26 @@ import { DEFAULT_ROUTE } from '../../helpers/constants/routes';
 import Box from '../../components/ui/box';
 import TextField from '../../components/ui/text-field';
 import PageContainer from '../../components/ui/page-container';
+import { addCollectible } from '../../store/actions'; 
+import { useDispatch } from 'react-redux';
 
 export default function AddCollectible() {
   const t = useI18nContext();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [address, setAddress] = useState('');
   const [tokenId, setTokenId] = useState('');
+
+  const handleAddCollectible = async () => {
+    const success = await dispatch(addCollectible(address, tokenId))
+    if(success){
+      console.log("success")
+    } else {
+      console.log("fail")
+    }
+     
+  }
 
   return (
     <PageContainer
@@ -21,7 +34,8 @@ export default function AddCollectible() {
         console.log(
           `Adding collectible with ID: ${tokenId} and address ${address}`,
         );
-        history.push(DEFAULT_ROUTE);
+        handleAddCollectible();
+        // history.push(DEFAULT_ROUTE);
       }}
       submitText={t('add')}
       onCancel={() => {
