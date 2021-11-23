@@ -6,7 +6,7 @@ import { DEFAULT_ROUTE } from '../../helpers/constants/routes';
 import Box from '../../components/ui/box';
 import TextField from '../../components/ui/text-field';
 import PageContainer from '../../components/ui/page-container';
-import { addCollectible } from '../../store/actions'; 
+import { addCollectibleVerifyOwnership } from '../../store/actions';
 import { useDispatch } from 'react-redux';
 
 export default function AddCollectible() {
@@ -18,14 +18,12 @@ export default function AddCollectible() {
   const [tokenId, setTokenId] = useState('');
 
   const handleAddCollectible = async () => {
-    const success = await dispatch(addCollectible(address, tokenId))
-    if(success){
-      console.log("success")
-    } else {
-      console.log("fail")
+    try {
+      await dispatch(addCollectibleVerifyOwnership(address, tokenId));
+    } catch (error) {
+      const val = error;
     }
-     
-  }
+  };
 
   return (
     <PageContainer

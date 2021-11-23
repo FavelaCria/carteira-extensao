@@ -1015,6 +1015,11 @@ export default class MetamaskController extends EventEmitter {
         collectiblesController,
       ),
 
+      addCollectibleVerifyOwnership: nodeify(
+        collectiblesController.addCollectibleVerifyOwnership,
+        collectiblesController,
+      ),
+
       removeAndIgnoreCollectible: nodeify(
         collectiblesController.removeAndIgnoreCollectible,
         collectiblesController,
